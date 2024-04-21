@@ -1,4 +1,4 @@
-a= "Hallo"
-b="ihr drei!"
+a = 3
 
-print(a,b)
+
+print(f"Hallo ihr {a} Teammitglieder!")
