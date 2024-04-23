@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Social Media Plattform</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="peach_javascript.js"></script>
 </head>
 <body>
   <header>
     <div class="top-bar">
-      <div class="field">Einloggen / Logout</div>
-      <div class="field"><img src="Platzhalter_Logo.png" alt="Hier steht das Logo" class="top-button"></div>
-      <div class="field">Einstellungen / Profil</div>
+      <div class="field"><button id="colorButton1">Wähle deine Hintergrundfarbe aus!</button></div>
+      <div class="field"><img src="Peach3.jpg" alt="Hier steht das Logo" class="top-button"></div>
+      <div class="field"><button id="colorButton2">Dein Profil / Deine Einstellungen!</button></div>
     </div>
   </header>
 
@@ -24,7 +25,7 @@
   </div>
 
   <main>
-    <div class="posts"> <!-- Hier sollen die Posts dynamisch eingefügt werden -->
+    <div class="posts" id="NewPosts"> <!-- Hier sollen die Posts dynamisch eingefügt werden -->
       <div class="posting">
         Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
         <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
@@ -50,11 +51,10 @@
 
   <footer>
     <div class="bottom-bar">
-      <input type="text" placeholder="Text eingeben">
-      <select>
-        <option value="images">Bilder</option>
-        <option value="videos">Videos</option>
-      </select>
+    <form id="myForm">  
+      <input type="text" placeholder="Text eingeben und auf Posten klicken">
+      <button type="submit">Posten!</button>
+    </form>
     </div>
   </footer>
 </body>
