@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Plattform</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <script src="{% static 'scripts.js' %}"></script>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      particlesJS('particles-js', {
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: "#ffffff"
+          },
+          shape: {
+            type: "circle",
+            stroke: {
+              width: 0,
+              color: "#000000"
+            },
+            polygon: {
+              nb_sides: 5
+            },
+            image: {
+              src: "img/github.svg",
+              width: 100,
+              height: 100
+            }
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200
+            }
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse"
+            },
+            onclick: {
+              enable: true,
+              mode: "push"
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1
+              }
+            },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4
+            },
+            push: {
+              particles_nb: 4
+            },
+            remove: {
+              particles_nb: 2
+            }
+          }
+        },
+        retina_detect: true
+      })
+    });
+  </script>
+  <script src="scripts.js" defer></script>
+  
+  <style>
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #0a0f24;
+      z-index: -1; /* Ensures it's behind all other content */
+    }
+</style>
+
+</head>
+
+<body>
+
+  <div id="particles-js"></div>
+
+  <header>
+    <div class="top-bar">
+      <div class="field" class="top-button">
+        {% if request.user.is_authenticated %}
+        <p>{{ request.user.username }}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        {% endif %}
+      </div>
+      <div><img src="{% static 'Platzhalter_Logo.png' %}" class="field" class="logo"></div>
+      <div class="field"><button id="colorButton2">Dein Profil / Deine Einstellungen!</button></div>
+
+    </div>
+  </header>
+
+  <div id="widgets">
+    <div class="widget-bar">
+      <div class="note"><img src="https://files.oaiusercontent.com/file-nKaNWIqBLFxMeyxCjuq2f1M1?se=2024-06-01T15%3A44%3A10Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D8a308367-090d-4ba3-af18-2ad91ea25927.webp&sig=VOa5%2BbcD8XOMmaLVN3/Ur0rC/9gIhzBdRJ8PI/G%2BO6Y%3D" alt="Hier steht Wetter." class="widget"></div>
+      <div class="note"><img src="https://files.oaiusercontent.com/file-ahnCDH1sEi3KxmmiO3aCh5wq?se=2024-06-01T15%3A46%3A26Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D217e859c-469b-4768-8007-4b649c92424c.webp&sig=9n0jxpxBtAYoN6LxQYHE6pPdiMRJ5rjAL%2BRCILS9ts0%3D" alt="Hier steht Verkehr." class="widget"></div>
+      <div class="note"><img src="https://files.oaiusercontent.com/file-0ldkEyhOmlplI26G3tvh6BVC?se=2024-06-01T15%3A48%3A28Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D808473c2-f80e-472a-9806-20ed9712a3d8.webp&sig=Hq304tqony%2BDHaeCSta7oz08bzmN4y3eS5sEGE7PR0o%3D" alt="Hier stehen Benachrichtigungen." class="widget"></div>
+    </div>
+  </div>
+
+  <main>
+    <div class="posts" id="NewPosts"> <!-- Hier sollen die Posts dynamisch eingefügt werden -->
+      <div class="posting">
+        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
+        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
+      </div>
+      <div class="posting">
+        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
+        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
+      </div>
+      <div class="posting">
+        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
+        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
+      </div>
+      <div class="posting">
+        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
+        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
+      </div>
+      <div class="posting">
+        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
+        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="bottom-bar">
+      <form id="myForm">  
+        <input type="text" placeholder="Text eingeben und auf Posten klicken">
+        <button type="submit">Posten!</button>
+      </form>
+    </div>
+  </footer>
+
+</body>
+</html>
