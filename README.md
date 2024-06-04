@@ -5,10 +5,10 @@ Ich habe dafür einfach einen Ordner auf meinem Desktop erstellt.
 
 ### Mit der Powershell in den erstellten Ordner navigieren.
 In meinem Fall: 
-> `cd Desktop/DjangoOrdner`
+`cd Desktop/DjangoOrdner`
 
 ### Virtual Environment in diesen Ordner installieren.
-> py -m venv venv
+`py -m venv venv`
 
 (das zweite "venv" ist einfach der Name der Umgebung. Die kann beliebig heißen.)
 
@@ -20,13 +20,13 @@ Auf der Branch-Startseite auf den grünen '<>Code'-Button drücken, links auf 'l
 die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die beiden Ordner und die drei Dateien) müssen auf der gleichen Ebene wie der venv-Ordner liegen.
 
 ### Django im Ordner installieren
-> pip install django
+`pip install django`
 
 ### Venv starten.
-> .\venv\Scripts\activate
+`.\venv\Scripts\activate`
 
 ### virtuellen Server starten
-> py manage.py runserver
+`py manage.py runserver`
 
 ### Projekt bzw. app im Browser öffnen
 url: 127.0.0.1:8000/
