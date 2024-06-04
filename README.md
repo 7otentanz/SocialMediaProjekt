@@ -5,7 +5,7 @@ Ich habe dafür einfach einen Ordner auf meinem Desktop erstellt.
 
 ### Mit der Powershell in den erstellten Ordner navigieren.
 In meinem Fall: 
-> cd Desktop/DjangoOrdner
+> `cd Desktop/DjangoOrdner`
 
 ### Virtual Environment in diesen Ordner installieren.
 > py -m venv venv
