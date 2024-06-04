@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{% static 'styles.css' %}">
   <script src="{% static 'scripts.js' %}"></script>
 
+<!-- Dieses Script ist ausschließlich für den Hintergrund -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -123,8 +124,7 @@
       })
     });
   </script>
-  <script src="scripts.js" defer></script>
-  
+
   <style>
     #particles-js {
       position: fixed;
@@ -135,7 +135,8 @@
       background-color: #0a0f24;
       z-index: -1; /* Ensures it's behind all other content */
     }
-</style>
+  </style>
+<!-- Hintergrund Ende! -->
 
 </head>
 
@@ -154,7 +155,7 @@
         <a href="{% url 'signup' %}">Signup</a>
         {% endif %}
       </div>
-      <div><img src="{% static 'Platzhalter_Logo.png' %}" class="field" class="logo"></div>
+      <div><img src="{% static 'Platzhalter_Logo.jpg' %}" class="field"></div>
       <div class="field"><button id="colorButton2">Dein Profil / Deine Einstellungen!</button></div>
 
     </div>
@@ -162,9 +163,9 @@
 
   <div id="widgets">
     <div class="widget-bar">
-      <div class="note"><img src="https://files.oaiusercontent.com/file-nKaNWIqBLFxMeyxCjuq2f1M1?se=2024-06-01T15%3A44%3A10Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D8a308367-090d-4ba3-af18-2ad91ea25927.webp&sig=VOa5%2BbcD8XOMmaLVN3/Ur0rC/9gIhzBdRJ8PI/G%2BO6Y%3D" alt="Hier steht Wetter." class="widget"></div>
-      <div class="note"><img src="https://files.oaiusercontent.com/file-ahnCDH1sEi3KxmmiO3aCh5wq?se=2024-06-01T15%3A46%3A26Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D217e859c-469b-4768-8007-4b649c92424c.webp&sig=9n0jxpxBtAYoN6LxQYHE6pPdiMRJ5rjAL%2BRCILS9ts0%3D" alt="Hier steht Verkehr." class="widget"></div>
-      <div class="note"><img src="https://files.oaiusercontent.com/file-0ldkEyhOmlplI26G3tvh6BVC?se=2024-06-01T15%3A48%3A28Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D808473c2-f80e-472a-9806-20ed9712a3d8.webp&sig=Hq304tqony%2BDHaeCSta7oz08bzmN4y3eS5sEGE7PR0o%3D" alt="Hier stehen Benachrichtigungen." class="widget"></div>
+      <div class="note"><img src="{% static 'Platzhalter_Wetter.jpg' %}" alt="Hier steht Wetter." class="widget"></div>
+      <div class="note"><img src="{% static 'Platzhalter_Verkehr.jpg' %}" alt="Hier steht Verkehr." class="widget"></div>
+      <div class="note"><img src="{% static 'Platzhalter_Benachrichtigung.jpg' %}" alt="Hier stehen Benachrichtigungen." class="widget"></div>
     </div>
   </div>
 
