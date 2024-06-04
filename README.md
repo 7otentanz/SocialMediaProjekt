@@ -19,6 +19,9 @@ Auf der Branch-Startseite auf den grünen '<>Code'-Button drücken, links auf 'l
 
 die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die beiden Ordner und die drei Dateien) müssen auf der gleichen Ebene wie der venv-Ordner liegen.
 
+### Django im Ordner installieren
+> pip install django
+
 ### Venv starten.
 > .\venv\Scripts\activate
 
