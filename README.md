@@ -17,7 +17,7 @@ Alle Dateien, die ich hochgeladen habe, entsprechen schon einem Projekt (se2netw
 
 Auf der Branch-Startseite auf den grünen '<>Code'-Button drücken, links auf 'local' navigieren und auf 'Download zip' klicken.
 
-die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die beiden Ordner und die beiden Dateien) müssen auf der gleichen Ebene wie der venv-Ordner liegen.
+die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die beiden Ordner und die drei Dateien) müssen auf der gleichen Ebene wie der venv-Ordner liegen.
 
 ### Venv starten.
 > .\venv\Scripts\activate
