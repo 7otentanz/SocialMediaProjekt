@@ -25,9 +25,6 @@ die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die bei
 ### Venv starten.
 > .\venv\Scripts\activate
 
-### In den Projektordner navigieren.
-> cd se2network
-
 ### virtuellen Server starten
 > py manage.py runserver
 
