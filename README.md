@@ -29,4 +29,6 @@ die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die bei
 `py manage.py runserver`
 
 ### Projekt bzw. app im Browser öffnen
-url: 127.0.0.1:8000/
+> 127.0.0.1:8000/
+
+Mit strg+c kann der Server wieder geschlossen werden.
