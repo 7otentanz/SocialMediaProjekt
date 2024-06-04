@@ -9,6 +9,7 @@ In meinem Fall:
 
 ### Virtual Environment in diesen Ordner installieren.
 > py -m venv venv
+
 (das zweite "venv" ist einfach der Name der Umgebung. Die kann beliebig heißen.)
 
 ### Dateien aus GitHub runterladen und im Ordner einfügen.
