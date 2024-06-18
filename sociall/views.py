@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
-from . import accountmanagement #Das Modul bleibt weiß, warum auch immer.
-          
-# Home page
+from . import accountmanagement
+
+# Gehört in das Dropdownmenü oben rechts!
 def profil(request):
     return render(request, 'SpeichernProfilbild2.html')
           
+# Home page          
 def index(request):
     return render(request, 'index.html')
 
@@ -19,9 +20,9 @@ def signup_view(request):
             user = form.save(commit=False)
             user.set_password(User.objects.make_random_password()) #geht nicht ohne passwort. Aber so wenigstens mit random-passwort, was nicht wieder benutzt werden muss.
             user.save()
-            accountmanagement.createprofile() #schreibt eine neue .json mit dem Nutzernamen
-            accountmanagement.setresidence() #NUR ZUM TESTEN AN DIESER STELLE!!!
             login(request, user)
+            accountmanagement.createprofile(request)
+            accountmanagement.setresidence(request) #gehört dann an die Stelle, an der der Wohnort übergeben wird!
             return redirect('home')
     else:
         form = SignupForm()
