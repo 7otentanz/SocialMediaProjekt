@@ -1,4 +1,5 @@
 import json
+import os
 
 #Erstellt die Nutzer.json mit dem ersten Inhalt: dem Nutzernamen.
 def createprofile(request):
@@ -10,13 +11,13 @@ def createprofile(request):
               masterlist.write(usernumberdump)
     except:
           print("Nutzer.json anlegen hat nicht funktioniert!")
+    os.rename(f"{user}.json", f"./sociall/Accountmanagement/{user}.json")
 
-#Fügt der Nutzer.json ein neues Dictionary mit dem Wohnort hinzu.
 def setresidence(request):
     residence = {"residence": "Engelsbrand"} #hier irgendwie durch die Profileinstellungen den Wohnort setzen
     user = request.user.username
     try:
-        with open(f"{user}.json", "a") as masterlist:
+        with open(f"./sociall/Accountmanagement/{user}.json", "a") as masterlist:
             residencedump = json.dumps(residence)
             masterlist.write(residencedump)
     except:
