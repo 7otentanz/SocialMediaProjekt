@@ -25,6 +25,11 @@ _die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die be
 ### Venv starten.
 `.\venv\Scripts\activate`
 
+### Error "cannot be loaded because the execution of scripts is disabled on this system"?
+Wenn dieser Error auftaucht, ist die Berechtigung Scripts auszuführen noch nicht erteilt. Also muss das mit  
+`Set-ExecutionPolicy Unrestricted -Force`  
+nachgeholt werden.
+
 ### virtuellen Server starten
 `py manage.py runserver`
 
