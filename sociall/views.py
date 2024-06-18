@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
-
-
-# Create your views here.
+from . import accountmanagement #Das Modul bleibt weiß, warum auch immer.
+          
 # Home page
 def index(request):
     return render(request, 'index.html')
@@ -15,10 +14,10 @@ def signup_view(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # Set a default password as Django requires it, but user won't use it for login
-            user.set_password(User.objects.make_random_password())
+            user.set_password(User.objects.make_random_password()) #geht nicht ohne passwort. Aber so wenigstens mit random-passwort, was nicht wieder benutzt werden muss.
             user.save()
-            # Automatically log the user in after signup
+            accountmanagement.createprofile() #schreibt eine neue .json mit dem Nutzernamen
+            accountmanagement.setresidence() #NUR ZUM TESTEN AN DIESER STELLE!!!
             login(request, user)
             return redirect('home')
     else:

@@ -5,6 +5,9 @@ body {
     background-color: #ca3e3e;
   }
 
+  a.linkywinky:link, a.linkywinky:hover, a.linkywinky:active, a.linkywinky:visited{
+    color: #999;
+  }
 /* Header für LogIn, Logo und Einstellungen */
 
   header {
