@@ -5,6 +5,9 @@ from .forms import SignupForm, LoginForm
 from . import accountmanagement #Das Modul bleibt weiß, warum auch immer.
           
 # Home page
+def profil(request):
+    return render(request, 'SpeichernProfilbild2.html')
+          
 def index(request):
     return render(request, 'index.html')
 
