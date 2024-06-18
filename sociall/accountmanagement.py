@@ -1,26 +1,23 @@
-from django.contrib.auth.models import User
 import json
 
-def createprofile():
-    all_users = User.objects.all()
-    for item in all_users:
-        try:
-            with open(f"{item.username}.json", "w") as masterlist: #username ist definiert in der django.contrib.auth.models - deshalb kann hier direkt auf den Namen zugegriffen werden!
-                usernumber = {"username": f"{item.username}"}
-                usernumberdump = json.dumps(usernumber)
-                masterlist.write(usernumberdump)
-        except:
-            with open(f"{item.username}.json", "r") as masterlist:
-                masterlist.readline()
-                return None
-
-def setresidence(): #GEHT NOCH NICHT!!!! Und das oben sollte dann nicht mehr für alle gemacht werden...
-    residence = {"residence": "Engelsbrand"} #hier irgendwie durch die Profileinstellungen den Wohnort setzen
-    usernumber = str(User)
+#Erstellt die Nutzer.json mit dem ersten Inhalt: dem Nutzernamen.
+def createprofile(request):
+    user = request.user.username #user und username sind definiert in der django.contrib.auth.models - deshalb kann hier direkt auf den Namen zugegriffen werden!
     try:
-        with open(f"{usernumber}.json", "w") as masterlist:
+        with open(f"{user}.json", "w") as masterlist:
+              usernumber = {"username": f"{user}"}
+              usernumberdump = json.dumps(usernumber)
+              masterlist.write(usernumberdump)
+    except:
+          print("Nutzer.json anlegen hat nicht funktioniert!")
+
+#Fügt der Nutzer.json ein neues Dictionary mit dem Wohnort hinzu.
+def setresidence(request):
+    residence = {"residence": "Engelsbrand"} #hier irgendwie durch die Profileinstellungen den Wohnort setzen
+    user = request.user.username
+    try:
+        with open(f"{user}.json", "a") as masterlist:
             residencedump = json.dumps(residence)
             masterlist.write(residencedump)
     except:
-        return None
-            
+        print("Wohnort setzen hat nicht funktioniert!")
