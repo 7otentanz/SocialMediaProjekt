@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+    <meta charset="utf-8">
+    <head>
+        
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <script src="{% static 'scripts.js' %}"></script>
+        <style>
+            body {
+                text-align: center;
+            }
+            img {
+            border-radius: 40%;
+            height: 5cm;
+            width: 5cm;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <h2>Deine Profileinstellungen</h2>
+        
+        <img src="{% static 'Astronaut.webp' %"} alt="Profilbild" id="Astronaut">
+        <button onclick="BildAuswahl()" type="button">Profilbild ändern!</button>
+
+        <div>
+            <p>Wohnort:  
+                <input type="text" id="Wohnorteingabe" placeholder="Hier Wohnort eingeben">
+                <button onclick="SpeichernWohnort()" type="button">Wohnort speichern!</button>
+            </p>
+        </div>
+        
+        <script>
+            var bilder = [
+            "{% static 'Astronaut.webp' %}",
+            "{% static 'Hundeastronaut.webp' %}",
+            "{% static 'Katzeastronaut.webp' %}",
+            "{% static 'Fuchsastronaut.webp' %}",
+            "{% static 'Bärastronaut.webp' %}"
+        ];
+            var currentIndex = 0;
+            var bildElement = document.getElementById("Astronaut");
+
+            window.onload = function() {
+                var gespeichertesBild = localStorage.getItem("profilbild");
+                if (gespeichertesBild) {
+                bildElement.src = gespeichertesBild;
+                currentIndex = bilder.indexOf(gespeichertesBild);
+                if (currentIndex === -1) currentIndex = 0;
+                } 
+                else {
+                bildElement.src = bilder[currentIndex];
+                }
+
+                var gespeicherterWohnort = localStorage.getItem("wohnort")
+                if (gespeicherterWohnort) {
+                    document.getElementById("Wohnorteingabe").value = gespeicherterWohnort;
+                }
+            };
+
+            function BildAuswahl() {
+                currentIndex = (currentIndex + 1) % bilder.length;
+                bildElement.src = bilder[currentIndex];
+
+                            // Speichere das aktuelle Bild
+                localStorage.setItem("profilbild", bilder[currentIndex]);
+            }
+
+            function SpeichernWohnort() {
+            var text = document.getElementById("Wohnorteingabe").value;
+            // Speichere den Text im localStorage
+            localStorage.setItem("wohnort", text);
+            alert("Wohnort wurde gespeichert!");
+        }
+        </script>
+
+    </body>
+</html>
