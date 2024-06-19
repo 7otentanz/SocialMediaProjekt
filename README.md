@@ -29,8 +29,7 @@ _die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die be
 Wenn dieser Error auftaucht, ist die Berechtigung Scripts auszuführen noch nicht erteilt. Also muss das mit  
 `Set-ExecutionPolicy RemoteSigned`  
 gefolgt von   
-`a`  
-für "Alle"  
+`a` für "Alle"  
 nachgeholt werden.
 
 ### virtuellen Server starten
