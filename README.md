@@ -28,9 +28,9 @@ _die zip-datei in den erstellten DjangoOrdner entpacken. der Inhalt (Also die be
 ### Error "cannot be loaded because the execution of scripts is disabled on this system"?
 Wenn dieser Error auftaucht, ist die Berechtigung Scripts auszuführen noch nicht erteilt. Also muss das mit  
 `Set-ExecutionPolicy RemoteSigned`  
-gefolgt von 
+gefolgt von   
 `a`  
-für "Alle"
+für "Alle"  
 nachgeholt werden.
 
 ### virtuellen Server starten
