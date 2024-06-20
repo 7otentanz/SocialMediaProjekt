@@ -4,7 +4,7 @@
   "picture": "keineahnung.jpg",
   "posts" 
     {
-    "1": ["DATETIME oder so", Inhalt, also was geschrieben wurde...", "Anzahl Likes", "Anzahl Dislikes", "Anzahl Flags"]
+    "1": ["DATETIME oder so", "Inhalt, also was geschrieben wurde...", "Anzahl Likes", "Anzahl Dislikes", "Anzahl Flags"]
     "2": ["DATETIME oder so", "Anderer Inhalt nuere Post", "Anzahl Likes", "Anzahl Dislikes", "Anzahl FLags"]
     }
 }
