@@ -3,6 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
 from . import accountmanagement
+
+# Profilseite
+def profil(request):
+    return render(request, 'SpeichernProfilbild.html')
           
 # Home page
 def index(request):
