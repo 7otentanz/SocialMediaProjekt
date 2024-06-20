@@ -1,7 +1,7 @@
 {
   "usernumber": "123768512837561823",
   "residence": "Stuttgart",
-  "picture": "keineahnung.jpg",
+  "userpic": "keineahnung.jpg",
   "posts" 
     {
     "1": ["DATETIME oder so", "Inhalt, also was geschrieben wurde...", "Anzahl Likes", "Anzahl Dislikes", "Anzahl Flags"]
