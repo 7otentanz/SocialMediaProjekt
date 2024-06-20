@@ -3,12 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
 from . import accountmanagement
-
-# Gehört in das Dropdownmenü oben rechts!
-def profil(request):
-    return render(request, 'SpeichernProfilbild2.html')
           
-# Home page          
+# Home page
 def index(request):
     return render(request, 'index.html')
 
@@ -22,7 +18,8 @@ def signup_view(request):
             user.save()
             login(request, user)
             accountmanagement.createprofile(request)
-            accountmanagement.setresidence(request) #gehört dann an die Stelle, an der der Wohnort übergeben wird!
+            accountmanagement.setresidence(request) #Steht hier nur zum PROBIEREN!
+            accountmanagement.setuserpic(request) #Steht hier nur zum PROBIEREN!
             return redirect('home')
     else:
         form = SignupForm()
