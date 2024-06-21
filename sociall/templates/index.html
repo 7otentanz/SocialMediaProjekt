@@ -153,11 +153,10 @@
         {% else %}
         <a class="linkywinky" href="{% url 'login' %}">Login</a>
         <a class="linkywinky" href="{% url 'signup' %}">Signup</a>
-        <a class="linkywinky" href="{% url 'Profil' %}">Profil</a>
         {% endif %}
       </div>
       <div><img src="{% static 'Platzhalter_Logo.jpg' %}" class="field"></div>
-      <div class="field"><button id="colorButton2">Dein Profil / Deine Einstellungen!</button></div>
+      <div class="field"><button id="colorButton2"><a class="linkywinky" href="{% url 'Profil' %}">Profil</a></button></div>
 
     </div>
   </header>

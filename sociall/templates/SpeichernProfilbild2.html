@@ -28,6 +28,7 @@
             <p>Wohnort:  
                 <input type="text" id="Wohnorteingabe" placeholder="Hier Wohnort eingeben">
                 <button onclick="SpeichernWohnort()" type="button">Wohnort speichern!</button>
+                <button onClick="javascript:history.back()">Zurück zur Startseite!</button>
             </p>
         </div>
         
@@ -60,17 +61,34 @@
             };
 
             function BildAuswahl() {
-                currentIndex = (currentIndex + 1) % bilder.length;
-                bildElement.src = bilder[currentIndex];
+            currentIndex = (currentIndex + 1) % bilder.length;
+            var newBild = bilder[currentIndex];
+            bildElement.src = newBild;
+            localStorage.setItem("profilbild", newBild);
 
-                            // Speichere das aktuelle Bild
-                localStorage.setItem("profilbild", bilder[currentIndex]);
-            }
+            fetch('/save-userpic/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ 'storedString': newBild })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+        }
 
             function SpeichernWohnort() {
             var text = document.getElementById("Wohnorteingabe").value;
-            // Speichere den Text im localStorage
             localStorage.setItem("wohnort", text);
+
+            fetch('/save-residence/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ 'storedString': text })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+
             alert("Wohnort wurde gespeichert!");
         }
         </script>

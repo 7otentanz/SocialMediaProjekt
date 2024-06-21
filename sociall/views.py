@@ -3,16 +3,19 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import SignupForm, LoginForm
 from . import accountmanagement
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
-# Profilseite
-def profil(request):
-    return render(request, 'SpeichernProfilbild.html')
-          
-# Home page
+# Index
 def index(request):
     return render(request, 'index.html')
 
-# signup page
+# Profileinstellung
+def profil(request):
+    return render(request, "SpeichernProfilbild2.html")
+
+# Registrieren
 def signup_view(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -22,14 +25,14 @@ def signup_view(request):
             user.save()
             login(request, user)
             accountmanagement.createprofile(request)
-            accountmanagement.setresidence(request) #Steht hier nur zum PROBIEREN!
+            #accountmanagement.setresidence(request) #Steht hier nur zum PROBIEREN!
             accountmanagement.setuserpic(request) #Steht hier nur zum PROBIEREN!
             return redirect('home')
     else:
         form = SignupForm()
     return render(request, 'signup.html', {'form': form})
 
-# login page
+# Anmelden
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -45,7 +48,23 @@ def login_view(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-# logout page
+# Abmelden
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+# Wohnort speichern beim Klick auf "Wohnort speichern"
+@csrf_exempt
+def save_residence(request):
+    if request.method == 'POST':
+        accountmanagement.setresidence(request)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'fail'}, status=400)
+
+# Profilbild speichern beim Klick auf "Profilbild ändern"
+@csrf_exempt
+def save_userpic(request):
+    if request.method == 'POST':
+        accountmanagement.setuserpic(request)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'fail'}, status=400)
