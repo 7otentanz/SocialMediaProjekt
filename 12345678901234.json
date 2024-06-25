@@ -4,7 +4,7 @@
   "userpic": "keineahnung.jpg",
   "posts" 
     {
-    "1": ["DATETIME oder so", "Inhalt, also was geschrieben wurde...", ["LIKES: Alle User, die Like geklickt haben"], ["DISLIKES: Alle User, die dislike geklickt haben"], ["FLAGS: Alle User, die FLAG geklickt haben"]]
+    "1": ["DATETIME oder so", "Inhalt, also was geschrieben wurde...", {"LIKES: Alle User, die Like geklickt haben"}, {"DISLIKES: Alle User, die dislike geklickt haben"}, {"FLAGS: Alle User, die FLAG geklickt haben"}]
     "2": ["DATETIME oder so", "Anderer Inhalt nuere Post", ["LIKES: Alle User, die Like geklickt haben"], ["DISLIKES: Alle User, die dislike geklickt haben"], ["FLAGS: Alle User, die FLAG geklickt haben"]]
     }
 }
