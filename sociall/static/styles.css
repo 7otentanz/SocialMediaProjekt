@@ -22,6 +22,7 @@ body {
   .top-bar {
     display: flex;
     justify-content: space-around;
+    height: 25vh;
   }
   
   .field {
@@ -50,12 +51,17 @@ body {
     background-image: linear-gradient(to right, rgb(255, 72, 0) , yellow);
   }
 
+  /*#userpic {
+    width: auto;
+    height: 50%;
+  }*/
+
 /* Widgets für Wetter, Verkehr und Benachrichtigungen */
 
   #widgets {
     position: relative;
     width: 100%;
-    top: 6rem;
+    top: 25vh;
     background-color: #555;
     color: #000;
     z-index: 98;
@@ -64,17 +70,23 @@ body {
   .widget-bar {
     display: flex;
     justify-content: space-around;
-    height: 6rem; /*Höhe der ganzen Widget-bar*/
+    height: 9rem; /*Höhe der ganzen Widget-bar*/
   }
 
   .widget { /*Class bisher nur für Platzhalter-img!*/
-    width: 6rem; /*Höhe des Inhalts in der Widget-bar*/
+    width: 9rem; /*Höhe des Inhalts in der Widget-bar*/
   }
 
   .note { /* Class bisher nur für Platzhalter-div! */
     flex: 1;
     text-align: center;
     height: 4rem;
+  }
+
+  #map {
+    width: 100%;
+    height: auto;
+    z-index: 1000;
   }
   
 /* Platz für alle Postings */

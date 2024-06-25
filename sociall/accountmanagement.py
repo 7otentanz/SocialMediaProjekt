@@ -41,6 +41,16 @@ def setresidence(request):
     except:
         print("Wohnort setzen hat nicht funktioniert!")
 
+#Holt den Wohnort aus der Nutzer.json heraus um sie einzufügen
+def getresidence(request):
+    user = request.user.username
+    try:
+        with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+            accountdict = json.loads(masterlist.read())
+            residence = accountdict["residence"]
+            return residence
+    except:
+        print("Kein Wohnort gesetzt!")
 
 #Fügt der bestehenden Nutzer.json das Profilbild in das bestehende Dictionary hinzu
 def setuserpic(request):
@@ -57,3 +67,13 @@ def setuserpic(request):
     except:
         print("Nutzerbild setzen hat nicht funktioniert!")
 
+#Holt das Profilbild aus der Nutzer.json um sie einzufügen
+def getuserpic(request):
+    user = request.user.username
+    try:
+        with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+            accountdict = json.loads(masterlist.read())
+            userpic = accountdict["userpic"]
+            return userpic
+    except:
+        print("Kein Profilbild gesetzt!")

@@ -9,7 +9,9 @@ import json
 
 # Index
 def index(request):
-    return render(request, 'index.html')
+    userpic = accountmanagement.getuserpic(request)
+    context = {"userpic": userpic}
+    return render(request, 'index.html', context)
 
 # Profileinstellung
 def profil(request):

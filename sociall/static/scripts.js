@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+/* Script für Wetter-API */
 document.addEventListener('DOMContentLoaded', function () {
     const apiKey = '17b62d4c54d46417f60f83e9fd630b56';
     const city = 'Ludwigsburg';
@@ -60,4 +61,87 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/* Script für die TomTom API */
 
+document.addEventListener('DOMContentLoaded', function () {
+    tt.setProductInfo('sociall', '1.0');
+    var map = tt.map({
+        key: '5AVUtGYgGWb40iePsDUVZCkVyQjnGbn7',
+        container: 'map',
+        center: [9.1672737, 48.892372], // Set to your desired coordinates
+        zoom: 6
+    });
+
+    map.on('style.load', function() {
+        // Add Traffic Flow Layer
+        map.addLayer({
+            id: 'traffic-flow',
+            type: 'raster',
+            source: {
+                type: 'raster',
+                tiles: [
+                    'https://api.tomtom.com/traffic/map/4/tile/flow/relative/{z}/{x}/{y}.png?key=5AVUtGYgGWb40iePsDUVZCkVyQjnGbn7'
+                ],
+                tileSize: 256
+            }
+        });
+
+        // Add Traffic Incidents Layer
+        map.addLayer({
+            id: 'traffic-incidents',
+            type: 'raster',
+            source: {
+                type: 'raster',
+                tiles: [
+                    'https://api.tomtom.com/traffic/map/4/tile/incidents/s1/{z}/{x}/{y}.png?key=5AVUtGYgGWb40iePsDUVZCkVyQjnGbn7'
+                ],
+                tileSize: 256
+            }
+        });
+
+        // Calculate and Add Route
+        calculateRoute();
+    });
+
+    function addRouteToMap(coordinates) {
+        var routeLayer = {
+            id: 'route',
+            type: 'line',
+            source: {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: coordinates
+                    }
+                }
+            },
+            paint: {
+                'line-color': '#4a90e2',
+                'line-width': 6
+            }
+        };
+        map.addLayer(routeLayer);
+    }
+
+    function calculateRoute() {
+        var start = '9.1672737,48.892372';
+        var end = '8.647264888758022,48.83021071625998';
+        var routeUrl = `https://api.tomtom.com/routing/1/calculateRoute/${start}:${end}/json?key=5AVUtGYgGWb40iePsDUVZCkVyQjnGbn7&travelMode=car`;
+
+        fetch(routeUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.routes && data.routes.length > 0) {
+                    var coordinates = data.routes[0].legs[0].points.map(point => [point.longitude, point.latitude]);
+                    addRouteToMap(coordinates);
+                } else {
+                    console.error('No route found');
+                }
+            })
+            .catch(error => {
+                console.error('Error calculating route:', error);
+            });
+    }
+});

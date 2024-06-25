@@ -7,6 +7,10 @@
   <title>Social Media Plattform</title>
   <link rel="stylesheet" href="{% static 'styles.css' %}">
   <script src="{% static 'scripts.js' %}"></script>
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps-web.min.js"></script>
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/services/services-web.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps.css">
+
 
 <!-- Dieses Script ist ausschließlich für den Hintergrund -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -148,6 +152,7 @@
     <div class="top-bar">
       <div class="field" class="top-button">
         {% if request.user.is_authenticated %}
+        <img src="{{ userpic }}" class="field">
         <p>{{ request.user.username }}</p>
         <a class="linkywinky" href="{% url 'logout' %}">Logout</a>
         {% else %}
@@ -164,8 +169,8 @@
   <div id="widgets">
     <div class="widget-bar">
       <div class="note widget" id="weather"></div>
-      <div class="note"><img src="{% static 'Platzhalter_Verkehr.jpg' %}" alt="Hier steht Verkehr." class="widget"></div>
-      <div class="note"><img src="{% static 'Platzhalter_Benachrichtigung.jpg' %}" alt="Hier stehen Benachrichtigungen." class="widget"></div>
+      <div class="note widget" id="map"></div>
+      <!--<div class="note"><img src="{% static 'Platzhalter_Benachrichtigung.jpg' %}" alt="Hier stehen Benachrichtigungen." class="widget"></div>-->
     </div>
   </div>
 
@@ -195,12 +200,14 @@
   </main>
 
   <footer>
+    {% if request.user.is_authenticated %}
     <div class="bottom-bar">
       <form id="myForm">  
         <input type="text" placeholder="Text eingeben und auf Posten klicken">
         <button type="submit">Posten!</button>
       </form>
     </div>
+    {% endif %}
   </footer>
 
 </body>

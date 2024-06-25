@@ -9,5 +9,5 @@ urlpatterns = [
     path('logout/', user_logout, name='logout'),
     path('SpeichernProfilbild/', profil, name='Profil'),
     path('save-residence/', views.save_residence, name='save_residence'),
-    path('save-userpic/', views.save_userpic, name='save_userpic')
+    path('save-userpic/', views.save_userpic, name='save_userpic'),
 ]
