@@ -74,9 +74,6 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ 'storedString': newBild })
             })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
         }
 
             function SpeichernWohnort() {
@@ -88,10 +85,6 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ 'storedString': text })
             })
-            .then(response => response.json())
-            .then(data => console.log('Success:', data))
-            .catch((error) => console.error('Error:', error));
-
             alert("Wohnort wurde gespeichert!");
         }
         </script>

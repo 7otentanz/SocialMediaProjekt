@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <style>
+            .dropbtn {
+                background-color: beige;
+                color: black;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+ 
+            .dropbtn:hover, .dropbtn:focus {
+                background-color: #ccffff;
+            }
+ 
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+ 
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: white;
+                min-width: 160px;
+                overflow: auto;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+ 
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+ 
+            .dropdown a:hover {background-color: #ddd;}
+ 
+            .show {display: block;}
+        </style>
+    </head>
+    <body>
+ 
+ 
+        <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Menü</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="SpeichernProfilbild.html">Profileinstellungen</a>
+            <a href="Datenschutzerklärung.html">Datenschutzerklärung</a>
+            <a href="Impressum.html">Impressum</a>
+        </div>
+        </div>
+ 
+        <script>
+// Wenn auf den Button geklickt wird, wird Dropdownliste angezeigt
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+ 
+// Wenn außerhalb des Buttons geklickt wird, wird Dropdownliste ausgeblendet
+        window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+                }
+            }
+        }
+        }
+        </script>
+ 
+    </body>
+</html>
+hat Kontextmenü

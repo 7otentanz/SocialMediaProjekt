@@ -30,9 +30,12 @@ def createprofile(request):
 def setresidence(request):
     residence = save_string(request)
     user = request.user.username
-    with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
-        accountdict = json.loads(masterlist.read())
-        accountdict["residence"] = residence
+    try:
+        with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+            accountdict = json.loads(masterlist.read())
+            accountdict["residence"] = residence
+    except:
+        print("Kein Wohnort gesetzt!")
 
     try:
         with open(f"./sociall/Accountmanagement/{user}.json", "w") as masterlist:

@@ -152,16 +152,24 @@
     <div class="top-bar">
       <div class="field" class="top-button">
         {% if request.user.is_authenticated %}
-        <img src="{{ userpic }}" class="field">
-        <p>{{ request.user.username }}</p>
-        <a class="linkywinky" href="{% url 'logout' %}">Logout</a>
+        <img src="{{ userpic }}" class="field" id="userpic">
+        <p id="usernumber">{{ request.user.username }}</p>
+        <a class="linkywinky" href="{% url 'logout' %}" id="logout">Logout</a>
         {% else %}
         <a class="linkywinky" href="{% url 'login' %}">Login</a>
         <a class="linkywinky" href="{% url 'signup' %}">Signup</a>
         {% endif %}
       </div>
-      <div><img src="{% static 'Platzhalter_Logo.jpg' %}" class="field"></div>
-      <div class="field"><button id="colorButton2"><a class="linkywinky" href="{% url 'Profil' %}">Profil</a></button></div>
+      <div><img src="{% static 'Platzhalter_Logo.jpg' %}" class="field" id="logo"></div>
+      <div class="dropdown, field">
+        <button onclick="myFunction()" class="dropbtn" id="colorButton2">Menü</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="{% url 'Profil' %}">Profileinstellungen</a>
+            <a href="Datenschutzerklärung.html">Datenschutzerklärung</a>
+            <a href="Impressum.html">Impressum</a>
+        </div>
+        </div>
+      <!--<div class="field"><button id="colorButton2"><a class="linkywinky" href="{% url 'Profil' %}">Profil</a></button></div>-->
 
     </div>
   </header>
@@ -170,31 +178,31 @@
     <div class="widget-bar">
       <div class="note widget" id="weather"></div>
       <div class="note widget" id="map"></div>
-      <!--<div class="note"><img src="{% static 'Platzhalter_Benachrichtigung.jpg' %}" alt="Hier stehen Benachrichtigungen." class="widget"></div>-->
     </div>
   </div>
 
   <main>
     <div class="posts" id="NewPosts"> <!-- Hier sollen die Posts dynamisch eingefügt werden -->
+      
       <div class="posting">
-        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
-        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
-      </div>
-      <div class="posting">
-        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
-        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
-      </div>
-      <div class="posting">
-        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
-        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
-      </div>
-      <div class="posting">
-        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
-        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
-      </div>
-      <div class="posting">
-        Dies ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!
-        <div class="reaction">&#128077    &#128078    &#128221    &#128256    &#127988</div>
+
+        <div class="toppost">
+          <div class="user-pic"><img src="{{ userpic }}" class="user-pic"></div> <!--HIER MUSS DANN DAS ÜBERGEBENE BILD DES POSTERS REIN!-->
+          <div class="user-number">{{ request.user.username }}</div> <!--HIER MUSS DIE USERNUMBER VOM POSTER REIN!-->
+          <div class="date-time">2024-06-25 12:17</div> <!--HIER MUSS DIE DATETIME AUS DEM POST EINGEFÜGT WERDEN-->
+        </div>
+
+        <div class="midpost"> ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!</div>
+        
+        <div class="botpost">
+          <div class="post-like">&#128640;</div>
+          <div class="counter-like">7</div><!--HIER DIE ANZAHL DER LIKES-->
+          <div class="post-dislike">&#128078;</div>
+          <div class="counter-dislike">5</div><!--HIER DIE ANZAHL DER DISLIKES-->
+          <div class="post-flag">&#127988;</div>
+          <div class="counter-flag">2</div><!--HIER DIE ANZAHL DER FLAGS-->
+        </div>
+
       </div>
     </div>
   </main>

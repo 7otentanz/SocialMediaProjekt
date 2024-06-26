@@ -15,6 +15,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Wenn auf den Button geklickt wird, wird Dropdownliste angezeigt
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Wenn außerhalb des Buttons geklickt wird, wird Dropdownliste ausgeblendet
+window.onclick = function(event) {
+if (!event.target.matches('.dropbtn')) {
+var dropdowns = document.getElementsByClassName("dropdown-content");
+var i;
+for (i = 0; i < dropdowns.length; i++) {
+var openDropdown = dropdowns[i];
+if (openDropdown.classList.contains('show')) {
+    openDropdown.classList.remove('show');
+    }
+}
+}
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const myForm = document.getElementById("myForm");
 

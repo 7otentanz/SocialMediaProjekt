@@ -26,14 +26,14 @@ body {
   }
   
   .field {
-    height: 3rem;
+    height: 18vh;
     padding: 0.5rem;
     flex: 1;
     text-align: center;
   }
 
   .top-button {
-    height: 5rem;
+    height: 9rem;
   }
 
   #colorButton1 {
@@ -43,6 +43,26 @@ body {
     padding: 10px;
     background-image: linear-gradient(to right, rgb(255, 72, 0) , yellow);
   }
+
+  #img {
+    height: 25vh;
+    width: auto;
+  }
+
+  #usernumber {
+    position: relative;
+    bottom: 4vh;
+  }
+
+  #logout {
+    position: relative;
+    bottom: 4.4vh;
+  }
+
+  #userpic {
+    height: 15vh;
+  }
+
   #colorButton2 {
     border: none;
     border-radius: 25%;
@@ -51,10 +71,44 @@ body {
     background-image: linear-gradient(to right, rgb(255, 72, 0) , yellow);
   }
 
-  /*#userpic {
-    width: auto;
-    height: 50%;
-  }*/
+  .dropbtn {
+    background-color: beige;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #ccffff;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
 
 /* Widgets für Wetter, Verkehr und Benachrichtigungen */
 
@@ -70,10 +124,11 @@ body {
   .widget-bar {
     display: flex;
     justify-content: space-around;
-    height: 9rem; /*Höhe der ganzen Widget-bar*/
+    height: 7rem; /*Höhe der ganzen Widget-bar*/
   }
 
   .widget { /*Class bisher nur für Platzhalter-img!*/
+
     width: 9rem; /*Höhe des Inhalts in der Widget-bar*/
   }
 
@@ -92,7 +147,7 @@ body {
 /* Platz für alle Postings */
 
   main {
-    padding-top: 60px; /* Einstellen, wenn Höhe der Widgets klar ist oder durch z-index die Widgets überlagern?*/
+    padding-top: 30vh; /* Einstellen, wenn Höhe der Widgets klar ist oder durch z-index die Widgets überlagern?*/
   }
   
   .posts {
@@ -110,14 +165,77 @@ body {
     border: solid #999;
     border-radius: 5px;
     background-color: #ffffff45;
-    
   }
 
-  .reaction {
-    padding: 1%;
-    border-top: solid #999;
-    border-radius: 5px;
-  }
+    .toppost {
+      padding: 1%;
+      border-top: solid #999;
+      border-radius: 5px;
+      height: 10vh;
+    }
+
+    .toppost div {
+      display: inline-block;
+      padding: 2%;
+    }
+
+      .user-pic {
+        height: 50px;
+        width: auto;
+        height: 7.5vh;
+      }
+
+      .user-number {
+        color: #999;
+        text-decoration: dotted;
+      }
+
+      .date-time{
+        color: #999;
+        text-decoration: dotted;
+      }
+
+    .midpost {
+      padding: 2%;
+      color: #ddd;
+    }
+
+    .botpost {
+      padding: 1%;
+      border-top: solid #999;
+      border-radius: 5px;
+      height: 10vh;
+    }
+
+    .botpost div {
+      display: inline-block;
+    }
+
+      .post-like {
+        font-size: 2rem;
+      }
+
+      .counter-like {
+        color: #ddd;
+        padding-right: 4%;
+      }
+
+      .post-dislike {
+        font-size: 2rem;
+      }
+
+      .counter-dislike {
+        color: #ddd;
+        padding-right: 4%;
+      }
+
+      .post-flag {
+        font-size: 2rem;
+      }
+
+      .counter-flag {
+        color: #ddd;
+      }
   
 /* Texteingabe und Auswahl für Bilder und Videos für Posts, die dann dynamisch eingefügt werden */
 

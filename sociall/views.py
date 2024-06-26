@@ -9,7 +9,7 @@ import json
 
 # Index
 def index(request):
-    userpic = accountmanagement.getuserpic(request)
+    userpic = accountmanagement.getuserpic(request) # HIER PROBLEM
     context = {"userpic": userpic}
     return render(request, 'index.html', context)
 
@@ -28,7 +28,7 @@ def signup_view(request):
             login(request, user)
             accountmanagement.createprofile(request)
             #accountmanagement.setresidence(request) #Steht hier nur zum PROBIEREN!
-            accountmanagement.setuserpic(request) #Steht hier nur zum PROBIEREN!
+            #accountmanagement.setuserpic(request) #HIER PROBLEM
             return redirect('home')
     else:
         form = SignupForm()
