@@ -12,6 +12,9 @@ _In meinem Fall:_
 
 _(das zweite "venv" ist einfach der Name der Umgebung. Die kann beliebig heißen.)_
 
+### Geopy in diesen Ordner installieren.
+`pip install geopy`
+
 ### Dateien aus GitHub runterladen und im Ordner einfügen.
 _Alle Dateien, die ich hochgeladen habe, entsprechen schon einem Projekt (se2network) und einer App (sociall)._
 
