@@ -17,6 +17,12 @@ def index(request):
 def profil(request):
     return render(request, "SpeichernProfilbild2.html")
 
+def Datenschutz(request):
+    return render(request, "Datenschutzerklärung.html")
+
+def Impressum(request):
+    return render(request, "Impressum.html")
+
 # Registrieren
 def signup_view(request):
     if request.method == 'POST':
