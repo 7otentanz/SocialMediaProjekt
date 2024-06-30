@@ -165,8 +165,8 @@
         <button onclick="myFunction()" class="dropbtn" id="colorButton2">Menü</button>
         <div id="myDropdown" class="dropdown-content">
             <a href="{% url 'Profil' %}">Profileinstellungen</a>
-            <a href="Datenschutzerklärung.html">Datenschutzerklärung</a>
-            <a href="Impressum.html">Impressum</a>
+            <a href="{% url 'Datenschutz' %}">Datenschutzerklärung</a>
+            <a href="{% url 'Impressum' %}">Impressum</a>
         </div>
         </div>
       <!--<div class="field"><button id="colorButton2"><a class="linkywinky" href="{% url 'Profil' %}">Profil</a></button></div>-->
