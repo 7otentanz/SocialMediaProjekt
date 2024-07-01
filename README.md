@@ -32,6 +32,10 @@ gefolgt von
 `a` für "Alle"  
 nachgeholt werden.
 
+### Datenbank aktualisieren.
+`py manage.py makemigrations`
+`py manage.py migrate`
+
 ### virtuellen Server starten
 `py manage.py runserver`
 
