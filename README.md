@@ -33,7 +33,7 @@ gefolgt von
 nachgeholt werden.
 
 ### Datenbank aktualisieren.
-`py manage.py makemigrations`
+`py manage.py makemigrations`  
 `py manage.py migrate`
 
 ### virtuellen Server starten
