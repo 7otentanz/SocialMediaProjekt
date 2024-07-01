@@ -6,11 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Social Media Plattform</title>
   <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}" >
+  {% if request.user.is_authenticated %}
+  <script type="text/javascript">
+    var username = "{{ request.user.username }}";
+  </script>
+  {% endif %}
   <script src="{% static 'scripts.js' %}"></script>
-  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps-web.min.js"></script>
-  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/services/services-web.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.14.0/maps/maps.css">
-
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+  <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' rel='stylesheet' />
 
 <!-- Dieses Script ist ausschließlich für den Hintergrund -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -162,14 +167,13 @@
       </div>
       <div><img src="{% static 'Platzhalter_Logo.jpg' %}" class="field" id="logo"></div>
       <div class="dropdown, field">
-        <button onclick="myFunction()" class="dropbtn" id="colorButton2">Menü</button>
+        <img src="static/menuebutton.png" onclick="myFunction()" class="dropbtn" id="menuebutton">
         <div id="myDropdown" class="dropdown-content">
             <a href="{% url 'Profil' %}">Profileinstellungen</a>
-            <a href="{% url 'Datenschutz' %}">Datenschutzerklärung</a>
-            <a href="{% url 'Impressum' %}">Impressum</a>
+            <a href="{% url 'datenschutz' %}">Datenschutzerklärung</a>
+            <a href="{% url 'impressum' %}">Impressum</a>
         </div>
         </div>
-      <!--<div class="field"><button id="colorButton2"><a class="linkywinky" href="{% url 'Profil' %}">Profil</a></button></div>-->
 
     </div>
   </header>
@@ -178,44 +182,198 @@
     <div class="widget-bar">
       <div class="note widget" id="weather"></div>
       <div class="note widget" id="map"></div>
+      <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+      <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js"></script>
+        <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+      async function fetchResidence() {
+        const response = await fetch(`./static/Accountmanagement/${username}.json?cacheBust=${new Date().getTime()}`);
+        const data = await response.json();
+        return data.residence;
+      }
+
+      async function initMap() {
+        const residence = await fetchResidence();
+        const destination = [9.168821654634952, 48.89310895988894];
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiN290ZW50YW56IiwiYSI6ImNseHhtc3A4dTE2czUybHF6bzgzY3lxeDcifQ.p4Pty2K8TmTXikYLu-CDxw';
+
+        // Initialize the map
+        const map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: residence, // Starting position [lng, lat] from users.json
+          zoom: 4 // Starting zoom level
+        });
+
+        const directions = new MapboxDirections({
+          accessToken: mapboxgl.accessToken,
+          unit: 'metric',
+          profile: 'mapbox/driving-traffic'
+        });
+
+        directions.setOrigin(residence); // Set origin from users.json
+        directions.setDestination(destination);
+
+        map.addControl(directions, 'top-left');
+
+        map.on('load', () => {
+          console.log('Map loaded successfully');})
+        }
+
+      // Initialize the map after fetching the residence data
+      initMap();
+      })
+        </script>
     </div>
   </div>
 
-  <main>
-    <div class="posts" id="NewPosts"> <!-- Hier sollen die Posts dynamisch eingefügt werden -->
-      
-      <div class="posting">
+<!-- Ab Hier Postfunktion!-->
+{% if request.user.is_authenticated %}
+<div id="posts"></div>
+{% endif %}
+<script>
+  function postContent() {
+      const content = document.getElementById('postContent').value;
+      const csrftoken = getCookie('csrftoken');
 
-        <div class="toppost">
-          <div class="user-pic"><img src="{{ userpic }}" class="user-pic"></div> <!--HIER MUSS DANN DAS ÜBERGEBENE BILD DES POSTERS REIN!-->
-          <div class="user-number">{{ request.user.username }}</div> <!--HIER MUSS DIE USERNUMBER VOM POSTER REIN!-->
-          <div class="date-time">2024-06-25 12:17</div> <!--HIER MUSS DIE DATETIME AUS DEM POST EINGEFÜGT WERDEN-->
-        </div>
+      fetch('/add_post/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({ content: content })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if(data.message === "Post added successfully") {
+              loadPosts();
+          }
+      });
+  }
 
-        <div class="midpost"> ist ein Beispielpost! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae facere beatae fugiat quasi nihil rerum tenetur. Voluptate vero reiciendis fuga hic cum quis quidem rerum, in sit dolores, itaque repellendus!</div>
-        
-        <div class="botpost">
-          <div class="post-like">&#128640;</div>
-          <div class="counter-like">7</div><!--HIER DIE ANZAHL DER LIKES-->
-          <div class="post-dislike">&#128078;</div>
-          <div class="counter-dislike">5</div><!--HIER DIE ANZAHL DER DISLIKES-->
-          <div class="post-flag">&#127988;</div>
-          <div class="counter-flag">2</div><!--HIER DIE ANZAHL DER FLAGS-->
-        </div>
+  function loadPosts() {
+      fetch('/get_all_posts/')
+      .then(response => response.json())
+      .then(posts => {
+          const postsContainer = document.getElementById('posts');
+          postsContainer.innerHTML = '';
+          posts.forEach(post => {
+              const postDiv = document.createElement('div');
+              postDiv.className = 'post';
+              postDiv.innerHTML = `
+                  <p><strong>${post.datetime}</strong></p>
+                  <p>${post.content}</p>
+                  <p>
+                      <button onclick="likePost(${post.user_id}, ${post.post_id})">👍 ${post.likes}</button>
+                      <button onclick="dislikePost(${post.user_id}, ${post.post_id})">👎 ${post.dislikes}</button>
+                      <button onclick="flagPost(${post.user_id}, ${post.post_id})">🚩 ${post.flags}</button>
+                  </p>
+              `;
+              postsContainer.appendChild(postDiv);
+          });
+      });
+  }
 
-      </div>
-    </div>
-  </main>
+  function likePost(user_id, post_id) {
+      fetch(`/like_post/${post_id}/`)
+      .then(response => response.json())
+      .then(data => {
+          loadPosts();
+      });
+  }
+
+  function dislikePost(user_id, post_id) {
+      fetch(`/dislike_post/${post_id}/`)
+      .then(response => response.json())
+      .then(data => {
+          loadPosts();
+      });
+  }
+
+  function flagPost(user_id, post_id) {
+      fetch(`/flag_post/${post_id}/`)
+      .then(response => response.json())
+      .then(data => {
+          loadPosts();
+      });
+  }
+
+  function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  loadPosts();
+</script>
 
   <footer>
+
+    <div class="cookie-banner" id="cookie-banner">
+      Diese Website verwendet Cookies, um sicherzustellen, dass Sie die bestmögliche Erfahrung auf unserer Website machen.
+      <a href="{% url 'datenschutz'%}">Mehr erfahren</a>
+      <button id="accept-cookies">Akzeptieren</button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          if (!localStorage.getItem('cookiesAccepted')) {
+              document.getElementById('cookie-banner').style.display = 'block';
+          }
+          
+          document.getElementById('accept-cookies').onclick = function() {
+              localStorage.setItem('cookiesAccepted', 'true');
+              document.getElementById('cookie-banner').style.display = 'none';
+          };
+      });
+    </script>
+    <style>
+        
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      z-index: 1000; /* Banner überlagert anderen Inhalt */
+      display: none;
+    }
+    .cookie-banner button {
+      background-color: #f1c40f;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .cookie-banner a {
+      color: #f1c40f;
+      text-decoration: none;
+    }
+
+    </style>
+
     {% if request.user.is_authenticated %}
     <div class="bottom-bar">
-      <form id="myForm">  
-        <input type="text" placeholder="Text eingeben und auf Posten klicken">
-        <button type="submit">Posten!</button>
-      </form>
+      <div>
+        <textarea id="postContent" placeholder="Text eingeben und auf Posten!"></textarea>
+        <button onclick="postContent()">Posten!</button>
+      </div>
     </div>
     {% endif %}
+    
   </footer>
 
 </body>

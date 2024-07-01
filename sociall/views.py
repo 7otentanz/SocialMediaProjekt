@@ -6,10 +6,13 @@ from . import accountmanagement
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.contrib.auth.decorators import login_required
+from .models import Post
+from django.utils import timezone
 
 # Index
 def index(request):
-    userpic = accountmanagement.getuserpic(request) # HIER PROBLEM
+    userpic = accountmanagement.getuserpic(request)
     context = {"userpic": userpic}
     return render(request, 'index.html', context)
 
@@ -17,10 +20,12 @@ def index(request):
 def profil(request):
     return render(request, "SpeichernProfilbild2.html")
 
-def Datenschutz(request):
+# Datenschutzerklärung
+def datenschutz(request):
     return render(request, "Datenschutzerklärung.html")
 
-def Impressum(request):
+# Impressum
+def impressum(request):
     return render(request, "Impressum.html")
 
 # Registrieren
@@ -76,3 +81,58 @@ def save_userpic(request):
         accountmanagement.setuserpic(request)
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'fail'}, status=400)
+
+@login_required
+def add_post(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        content = data.get('content')
+        if content:
+            post = Post.objects.create(user=request.user, content=content, created_at=timezone.now())
+            return JsonResponse({'message': 'Post added successfully'})
+        return JsonResponse({'message': 'Content cannot be empty'}, status=400)
+    return JsonResponse({'message': 'Invalid request'}, status=400)
+
+@login_required
+def get_all_posts(request):
+    posts = Post.objects.all().order_by('-created_at')
+    post_list = [{
+        'user_id': post.user.id,
+        'post_id': post.id,
+        'datetime': post.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+        'content': post.content,
+        'likes': post.likes.count(),
+        'dislikes': post.dislikes.count(),
+        'flags': post.flags.count()
+    } for post in posts]
+    return JsonResponse(post_list, safe=False)
+
+@login_required
+def handle_like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    return JsonResponse({'likes': post.likes.count()})
+
+@login_required
+def handle_dislike(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.user in post.dislikes.all():
+        post.dislikes.remove(request.user)
+    else:
+        post.dislikes.add(request.user)
+    return JsonResponse({'dislikes': post.dislikes.count()})
+
+@login_required
+def handle_flag(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.user in post.flags.all():
+        post.flags.remove(request.user)
+    else:
+        post.flags.add(request.user)
+    if post.flags.count() > 5:
+        post.delete()
+        return JsonResponse({'message': 'Post removed due to flags'})
+    return JsonResponse({'flags': post.flags.count()})

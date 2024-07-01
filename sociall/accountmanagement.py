@@ -2,6 +2,7 @@ import json
 import os
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from geopy.geocoders import Nominatim
 
 # Daten aus dem localStorage empfangen
 @csrf_exempt
@@ -23,22 +24,27 @@ def createprofile(request):
     except:
           print("Nutzer.json anlegen hat nicht funktioniert!")
 
-    os.rename(f"{user}.json", f"./sociall/Accountmanagement/{user}.json")
+    os.rename(f"{user}.json", f"./sociall/static/Accountmanagement/{user}.json")
 
 
 #Fügt der bestehenden Nutzer.json den Wohnort in das bestehende Dictionary hinzu
 def setresidence(request):
     residence = save_string(request)
+
+    #geopy um den Wohnort in Koordination zu übersetzen
+    geolocator = Nominatim(user_agent="MyApp")
+    location = geolocator.geocode(residence)
+
     user = request.user.username
     try:
-        with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+        with open(f"./sociall/static/Accountmanagement/{user}.json", "r") as masterlist:
             accountdict = json.loads(masterlist.read())
-            accountdict["residence"] = residence
+            accountdict["residence"] = [location.longitude, location.latitude]
     except:
         print("Kein Wohnort gesetzt!")
 
     try:
-        with open(f"./sociall/Accountmanagement/{user}.json", "w") as masterlist:
+        with open(f"./sociall/static/Accountmanagement/{user}.json", "w") as masterlist:
             accountdictdump = json.dumps(accountdict)
             masterlist.write(accountdictdump)
     except:
@@ -48,7 +54,7 @@ def setresidence(request):
 def getresidence(request):
     user = request.user.username
     try:
-        with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+        with open(f"./sociall/static/Accountmanagement/{user}.json", "r") as masterlist:
             accountdict = json.loads(masterlist.read())
             residence = accountdict["residence"]
             return residence
@@ -59,12 +65,12 @@ def getresidence(request):
 def setuserpic(request):
     userpic = save_string(request)
     user = request.user.username
-    with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+    with open(f"./sociall/static/Accountmanagement/{user}.json", "r") as masterlist:
         accountdict = json.loads(masterlist.read())
         accountdict["userpic"] = userpic
 
     try:
-        with open(f"./sociall/Accountmanagement/{user}.json", "w") as masterlist:
+        with open(f"./sociall/static/Accountmanagement/{user}.json", "w") as masterlist:
             accountdictdump = json.dumps(accountdict)
             masterlist.write(accountdictdump)
     except:
@@ -74,7 +80,7 @@ def setuserpic(request):
 def getuserpic(request):
     user = request.user.username
     try:
-        with open(f"./sociall/Accountmanagement/{user}.json", "r") as masterlist:
+        with open(f"./sociall/static/Accountmanagement/{user}.json", "r") as masterlist:
             accountdict = json.loads(masterlist.read())
             userpic = accountdict["userpic"]
             return userpic
